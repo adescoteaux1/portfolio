@@ -1,3 +1,4 @@
+"use client" 
 import React, { useState } from 'react';
 import { ArrowUpRight, ChevronDown, ChevronUp } from 'lucide-react';
 import content from "../content/content";
