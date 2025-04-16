@@ -1,103 +1,300 @@
-import Image from "next/image";
+"use client"
+import React from 'react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { projects, Project } from './content/projects';
+import { experience } from './content/experience';
+import TypingEffect from './components/typingEffect';
+import ExperienceSnapshot from './components/experienceSnapshot';
+import ProjectFeature from './components/projectFeature';
+import SafeImage from './components/safeImage';
+import Layout from './components/layout';
 
-export default function Home() {
+const HomePage = () => {
+  // Color palette - soft greens and browns
+  const colors = {
+    darkGreen: '#5C6D63',
+    mediumGreen: '#8BA888',
+    lightGreen: '#C2D6C0',
+    darkBrown: '#6D5C50',
+    mediumBrown: '#A3917A',
+    lightBrown: '#E0D6C8'
+  };
+
+  // Filter for current experiences and featured projects
+  const currentExperiences = experience.filter(exp => exp.date.includes('Present')).slice(0, 2);
+  const featuredProjects = projects.filter(project => project.featured).slice(0, 2);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <Layout>
+      {/* Hero Section */}
+      <section className="py-16 flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
+        <div className="md:w-3/5 order-2 md:order-1">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            Building <span style={{ color: colors.darkGreen }}>Impactful</span> Digital Experiences
+          </h1>
+          
+          <div className="flex items-center text-2xl md:text-3xl mb-8">
+            <h2 className="mr-2">I&apos;m a</h2>
+            <TypingEffect />
+          </div>
+          
+          <p className="text-lg md:text-xl mb-8 text-gray-700">
+            Computer Science student at Northeastern University with a passion for 
+            creating sustainable technology solutions and user-centered applications.
+          </p>
+          
+          <div className="flex flex-wrap gap-4">
+            <Link href="/projects">
+              <button 
+                style={{ 
+                  backgroundColor: colors.darkGreen,
+                  color: "white" 
+                }}
+                className="px-6 py-3 rounded-md font-medium flex items-center"
+              >
+                See My Work <ArrowRight size={18} className="ml-2" />
+              </button>
+            </Link>
+            
+            <Link href="/contact">
+              <button 
+                style={{ 
+                  backgroundColor: "transparent", 
+                  color: colors.darkBrown,
+                  border: `2px solid ${colors.darkBrown}`
+                }}
+                className="px-6 py-3 rounded-md font-medium"
+              >
+                Get In Touch
+              </button>
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        
+        <div className="md:w-2/5 order-1 md:order-2 flex justify-center">
+          <div 
+            style={{ 
+              background: `linear-gradient(135deg, ${colors.lightGreen}, ${colors.mediumGreen})`,
+              padding: "24px",
+              borderRadius: "12px",
+              position: "relative",
+              overflow: "hidden"
+            }}
+            className="shadow-lg"
+          >
+            {/* Decorative elements */}
+            <div
+              style={{
+                position: "absolute",
+                top: "-15px",
+                right: "-15px",
+                width: "100px",
+                height: "100px",
+                borderRadius: "50%",
+                backgroundColor: colors.darkGreen,
+                opacity: "0.2"
+              }}
+            ></div>
+            <div
+              style={{
+                position: "absolute",
+                bottom: "-20px",
+                left: "-20px",
+                width: "150px",
+                height: "150px",
+                borderRadius: "50%",
+                backgroundColor: colors.lightBrown,
+                opacity: "0.3"
+              }}
+            ></div>
+            
+            <SafeImage 
+              src="/api/placeholder/350/350" 
+              alt="Profile" 
+              className="rounded-lg relative z-10"
+              fallbackSrc="/api/placeholder/350/350"
+            />
+          </div>
+        </div>
+      </section>
+      
+      {/* Divider with skills */}
+      <div 
+        style={{ 
+          backgroundColor: colors.lightBrown,
+          borderRadius: "8px"
+        }}
+        className="p-8 my-12"
+      >
+        <h3 className="text-lg font-medium mb-4" style={{ color: colors.darkBrown }}>
+          Technical Expertise
+        </h3>
+        
+        <div className="flex flex-wrap gap-3">
+          {["React", "Next.js", "TypeScript", "Node.js", "Go", "PostgreSQL", "MongoDB", "UX/UI Design"].map((skill, index) => (
+            <span
+              key={index}
+              style={{ 
+                backgroundColor: colors.darkGreen,
+                color: "white" 
+              }}
+              className="px-3 py-1 rounded-full text-sm"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+      
+      {/* Current Experience Section */}
+      <section className="py-8">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold" style={{ color: colors.darkBrown }}>
+            Current Roles
+          </h2>
+          
+          <Link href="/experience">
+            <span 
+              className="text-sm font-medium flex items-center"
+              style={{ color: colors.darkGreen }}
+            >
+              View All Experience <ArrowRight size={16} className="ml-1" />
+            </span>
+          </Link>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-6">
+          {currentExperiences.map((exp, index) => (
+            <ExperienceSnapshot key={index} {...exp} />
+          ))}
+        </div>
+      </section>
+      
+      {/* Featured Projects Section */}
+      <section 
+        style={{ 
+          backgroundColor: colors.lightGreen,
+          borderRadius: "12px",
+          padding: "32px",
+          marginTop: "48px",
+          marginBottom: "48px"
+        }}
+      >
+        <div className="mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: colors.darkBrown }}>
+            Featured Projects
+          </h2>
+          <p className="text-gray-700">Highlights from my recent work</p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          {featuredProjects.map((project: Project, index) => (
+            <ProjectFeature key={index} project={project} />
+          ))}
+        </div>
+        
+        <div className="mt-8 text-center">
+          <Link href="/projects">
+            <button 
+              style={{ 
+                backgroundColor: colors.darkBrown,
+                color: "white" 
+              }}
+              className="px-6 py-3 rounded-md font-medium inline-flex items-center"
+            >
+              Explore All Projects <ArrowRight size={18} className="ml-2" />
+            </button>
+          </Link>
+        </div>
+      </section>
+      
+      {/* About Me Brief */}
+      <section className="py-12">
+        <div className="md:flex md:items-center gap-12">
+          <div className="md:w-2/5 mb-8 md:mb-0">
+            <div 
+              style={{ 
+                backgroundColor: colors.mediumBrown,
+                borderRadius: "8px",
+                padding: "24px",
+                position: "relative"
+              }}
+              className="text-white"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">About Me</h2>
+              <p className="text-white text-opacity-90 mb-6">
+                I&apos;m passionate about creating technology that makes a positive impact 
+                and solving complex problems with elegant solutions.
+              </p>
+              <Link href="/about">
+                <button 
+                  style={{ 
+                    backgroundColor: colors.darkGreen,
+                    color: "white" 
+                  }}
+                  className="px-4 py-2 rounded-md text-sm font-medium"
+                >
+                  Learn More
+                </button>
+              </Link>
+              
+              {/* Decorative element */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "12px",
+                  right: "12px",
+                  width: "60px",
+                  height: "60px",
+                  borderRadius: "50%",
+                  border: `2px dashed ${colors.lightBrown}`,
+                  opacity: "0.4"
+                }}
+              ></div>
+            </div>
+          </div>
+          
+          <div className="md:w-3/5">
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                {
+                  title: "Education",
+                  content: "BS in Computer Science and Mathematics at Northeastern University"
+                },
+                {
+                  title: "Interests",
+                  content: "Sustainable technology, data visualization, and open source contribution"
+                },
+                {
+                  title: "Current Focus",
+                  content: "Full-stack web development and DevOps automation"
+                },
+                {
+                  title: "Location",
+                  content: "Based in Boston, MA"
+                }
+              ].map((item, index) => (
+                <div 
+                  key={index}
+                  style={{ 
+                    backgroundColor: "white",
+                    borderRadius: "8px",
+                    border: `1px solid ${colors.lightBrown}`,
+                    padding: "16px"
+                  }}
+                  className="shadow-sm"
+                >
+                  <h3 className="font-bold mb-2" style={{ color: colors.darkGreen }}>{item.title}</h3>
+                  <p className="text-sm text-gray-700">{item.content}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </Layout>
   );
-}
+};
+
+export default HomePage;
