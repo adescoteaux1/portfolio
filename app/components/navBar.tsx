@@ -31,7 +31,7 @@ const Navbar = () => {
     <nav style={{ backgroundColor: colors.darkGreen, color: "white" }} className="px-6 py-4 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold hover:opacity-90">
-          John Doe
+          Ally Descoteaux
         </Link>
         
         {/* Desktop Navigation */}
