@@ -23,15 +23,23 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Projects', path: '/projects' },
-    { name: 'Experience', path: '/experiences' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'Experience', path: '/experiences' }
   ];
 
   return (
     <nav style={{ backgroundColor: colors.darkGreen, color: "white" }} className="px-6 py-4 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold hover:opacity-90">
-          Ally Descoteaux
+        <Link href="/" className="flex items-center hover:opacity-90">
+          {/* Cursive D Logo */}
+          <span 
+            className="text-4xl font-bold mr-2" 
+            style={{ 
+              fontFamily: "'Brush Script MT', cursive", 
+            }}
+          >
+            D
+          </span>
+          <span className="text-xl font-medium">Ally Descoteaux</span>
         </Link>
         
         {/* Desktop Navigation */}

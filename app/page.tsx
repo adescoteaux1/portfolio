@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { projects, Project } from './content/projects';
 import { experience } from './content/experience';
-import TypingEffect from './components/typingEffect';
 import ExperienceSnapshot from './components/experienceSnapshot';
 import ProjectFeature from './components/projectFeature';
 import SafeImage from './components/safeImage';
@@ -28,58 +27,52 @@ const HomePage = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-16 flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
-        <div className="md:w-3/5 order-2 md:order-1">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Building <span style={{ color: colors.darkGreen }}>Impactful</span> Digital Experiences
+      <section className="py-24 md:py-32 flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-16">
+        <div className="md:w-1/2 order-2 md:order-1">
+          <h1 className="text-4xl md:text-6xl font-bold mb-8">
+            <span style={{ color: colors.darkGreen }}>Hi, I&apos;m Ally!</span>
           </h1>
-          
-          <div className="flex items-center text-2xl md:text-3xl mb-8">
-            <h2 className="mr-2">I&apos;m a</h2>
-            <TypingEffect />
-          </div>
-          
-          <p className="text-lg md:text-xl mb-8 text-gray-700">
-            Computer Science student at Northeastern University with a passion for 
-            creating sustainable technology solutions and user-centered applications.
+          <p className="text-lg md:text-xl mb-10 text-gray-700">
+            I&apos;m a student and aspiring software engineer with a passion for building innovative solutions and expanding my knowledge.
           </p>
-          
           <div className="flex flex-wrap gap-4">
+          <Link href="/about">
+              <button
+                style={{
+                  backgroundColor: "transparent",
+                  color: colors.darkBrown,
+                  border: `2px solid ${colors.darkBrown}`
+                }}
+                className="px-6 py-3 rounded-md font-medium"
+              >
+                About me...
+              </button>
+            </Link>
             <Link href="/projects">
-              <button 
-                style={{ 
+              <button
+                style={{
                   backgroundColor: colors.darkGreen,
-                  color: "white" 
+                  color: "white"
                 }}
                 className="px-6 py-3 rounded-md font-medium flex items-center"
               >
                 See My Work <ArrowRight size={18} className="ml-2" />
               </button>
             </Link>
-            
-            <Link href="/contact">
-              <button 
-                style={{ 
-                  backgroundColor: "transparent", 
-                  color: colors.darkBrown,
-                  border: `2px solid ${colors.darkBrown}`
-                }}
-                className="px-6 py-3 rounded-md font-medium"
-              >
-                Get In Touch
-              </button>
-            </Link>
           </div>
         </div>
         
-        <div className="md:w-2/5 order-1 md:order-2 flex justify-center">
-          <div 
-            style={{ 
+        <div className="md:w-1/2 order-1 md:order-2 flex justify-center">
+          <div
+            style={{
               background: `linear-gradient(135deg, ${colors.lightGreen}, ${colors.mediumGreen})`,
-              padding: "24px",
-              borderRadius: "12px",
+              padding: "32px",
+              borderRadius: "16px",
               position: "relative",
-              overflow: "hidden"
+              overflow: "hidden",
+              maxWidth: "500px",
+              width: "100%",
+              boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)"
             }}
             className="shadow-lg"
           >
@@ -87,10 +80,10 @@ const HomePage = () => {
             <div
               style={{
                 position: "absolute",
-                top: "-15px",
-                right: "-15px",
-                width: "100px",
-                height: "100px",
+                top: "-80px",
+                right: "-80px",
+                width: "300px",
+                height: "300px",
                 borderRadius: "50%",
                 backgroundColor: colors.darkGreen,
                 opacity: "0.2"
@@ -99,21 +92,35 @@ const HomePage = () => {
             <div
               style={{
                 position: "absolute",
-                bottom: "-20px",
-                left: "-20px",
-                width: "150px",
-                height: "150px",
+                bottom: "-60px",
+                left: "-60px",
+                width: "200px",
+                height: "200px",
                 borderRadius: "50%",
                 backgroundColor: colors.lightBrown,
                 opacity: "0.3"
               }}
             ></div>
             
-            <SafeImage 
-              src="/api/placeholder/350/350" 
-              alt="Profile" 
-              className="rounded-lg relative z-10"
-              fallbackSrc="/api/placeholder/350/350"
+            {/* Additional decorative element */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "10%",
+                width: "80px",
+                height: "80px",
+                borderRadius: "50%",
+                border: `3px solid ${colors.darkBrown}`,
+                opacity: "0.15"
+              }}
+            ></div>
+            
+            <SafeImage
+              src="/HomeProfile.png"
+              alt="Profile"
+              className="rounded-lg relative z-10 w-full max-w-[600px]"  // Control width with CSS
+              fallbackSrc="/api/placeholder/450/450"
             />
           </div>
         </div>
@@ -132,7 +139,7 @@ const HomePage = () => {
         </h3>
         
         <div className="flex flex-wrap gap-3">
-          {["React", "Next.js", "TypeScript", "Node.js", "Go", "PostgreSQL", "MongoDB", "UX/UI Design"].map((skill, index) => (
+          {["React", "Next.js", "TypeScript", "Node.js", "Go", "PostgreSQL", "MongoDB", "Java", "Python", "C#"].map((skill, index) => (
             <span
               key={index}
               style={{ 

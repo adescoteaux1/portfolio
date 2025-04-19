@@ -340,7 +340,7 @@ const AboutPage = () => {
               {
                 title: "Baking",
                 description: "Experimenting with recipes and techniques from different cuisines as a creative outlet.",
-                icon: "🍳"
+                icon: "🍰"
               },
               {
                 title: "Open Source Contribution",
@@ -377,13 +377,13 @@ const AboutPage = () => {
             I&apos;m always open to discussing new projects, opportunities, or just chatting about technology.
           </p>
           <div className="flex justify-center space-x-4">
-            <a 
+            {/* <a 
               href="/contact"
               style={{ backgroundColor: colors.darkBrown, color: "white" }}
               className="px-6 py-3 rounded-md font-medium"
             >
               Get in Touch
-            </a>
+            </a> */}
             <a 
               href="/projects"
               style={{ 
