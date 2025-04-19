@@ -37,24 +37,26 @@ const HomePage = () => {
           </p>
           <div className="flex flex-wrap gap-4">
           <Link href="/about">
-              <button
-                style={{
-                  backgroundColor: "transparent",
-                  color: colors.darkBrown,
-                  border: `2px solid ${colors.darkBrown}`
-                }}
-                className="px-6 py-3 rounded-md font-medium"
-              >
-                About me...
-              </button>
-            </Link>
+            <button
+              style={{
+                backgroundColor: "transparent",
+                color: colors.darkBrown,
+                border: `2px solid ${colors.darkBrown}`,
+                transition: "all 0.3s ease"
+              }}
+              className="px-6 py-3 rounded-md font-medium hover:bg-opacity-10 hover:bg-gray-300 hover:scale-105"
+            >
+              About me...
+            </button>
+          </Link>
             <Link href="/projects">
               <button
                 style={{
                   backgroundColor: colors.darkGreen,
-                  color: "white"
+                  color: "white",
+                  transition: "all 0.3s ease"
                 }}
-                className="px-6 py-3 rounded-md font-medium flex items-center"
+                className="px-6 py-3 rounded-md font-medium flex items-center hover:shadow-lg hover:brightness-110 hover:scale-105"
               >
                 See My Work <ArrowRight size={18} className="ml-2" />
               </button>
@@ -163,7 +165,7 @@ const HomePage = () => {
           
           <Link href="/experience">
             <span 
-              className="text-sm font-medium flex items-center"
+              className="text-sm font-medium flex items-center hover:underline cursor-pointer"
               style={{ color: colors.darkGreen }}
             >
               View All Experience <ArrowRight size={16} className="ml-1" />
@@ -206,9 +208,10 @@ const HomePage = () => {
             <button 
               style={{ 
                 backgroundColor: colors.darkBrown,
-                color: "white" 
+                color: "white",
+                transition: "all 0.3s ease"
               }}
-              className="px-6 py-3 rounded-md font-medium inline-flex items-center"
+              className="px-6 py-3 rounded-md font-medium inline-flex items-center hover:shadow-lg hover:brightness-110 hover:scale-105 transition-transform"
             >
               Explore All Projects <ArrowRight size={18} className="ml-2" />
             </button>
@@ -238,9 +241,10 @@ const HomePage = () => {
                 <button 
                   style={{ 
                     backgroundColor: colors.darkGreen,
-                    color: "white" 
+                    color: "white",
+                    transition: "all 0.3s ease"
                   }}
-                  className="px-4 py-2 rounded-md text-sm font-medium"
+                  className="px-4 py-2 rounded-md text-sm font-medium inline-flex items-center hover:shadow-lg hover:brightness-110 hover:scale-105 transition-transform"
                 >
                   Learn More
                 </button>
@@ -275,7 +279,7 @@ const HomePage = () => {
                 },
                 {
                   title: "Current Focus",
-                  content: "Full-stack web development and DevOps automation"
+                  content: "Full-stack development and DevOps automation"
                 },
                 {
                   title: "Location",

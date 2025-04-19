@@ -68,7 +68,7 @@ const ProjectFeature: React.FC<{ project: Project }> = ({ project }) => {
               backgroundColor: colors.darkGreen,
               color: "white"
             }}
-            className="px-4 py-2 rounded-md text-sm font-medium inline-flex items-center"
+            className="px-4 py-2 rounded-md text-sm font-medium inline-flex items-center hover:opacity-90 transition-colors"
           >
             View Details <ExternalLink size={14} className="ml-1" />
           </Link>

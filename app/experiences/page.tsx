@@ -308,43 +308,6 @@ const ExperiencePage = () => {
           </div>
         </div>
       </section>
-      
-      {/* Resume Download */}
-      <section className="py-16 text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-4">Want to see the full picture?</h2>
-          <p className="text-lg mb-8">
-            Download my complete resume for a comprehensive overview of my experience, 
-            education, and skills.
-          </p>
-          <div className="flex justify-center space-x-4">
-            <a 
-              href="/resume.pdf"
-              target="_blank"
-              style={{ backgroundColor: colors.darkBrown, color: "white" }}
-              className="px-6 py-3 rounded-md font-medium flex items-center justify-center"
-            >
-              Download Resume
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-            </a>
-            <a 
-              href="/contact"
-              style={{ 
-                backgroundColor: "transparent", 
-                color: colors.darkBrown,
-                border: `2px solid ${colors.darkBrown}`
-              }}
-              className="px-6 py-3 rounded-md font-medium"
-            >
-              Contact Me
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
     </Layout>
   );

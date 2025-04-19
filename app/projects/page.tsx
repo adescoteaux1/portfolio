@@ -322,35 +322,6 @@ const ProjectsPage = () => {
         </section>
       )}
       
-      {/* Contact CTA */}
-      <section className="py-16 text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-4">Interested in working together?</h2>
-          <p className="text-lg mb-8">
-            I&apos;m always open to discussing new projects, work opportunities or potential collaborations.
-          </p>
-          <div className="flex justify-center space-x-4">
-            <a 
-              href="/contact"
-              style={{ backgroundColor: colors.darkBrown, color: "white" }}
-              className="px-6 py-3 rounded-md font-medium"
-            >
-              Get in Touch
-            </a>
-            <a 
-              href="/resume"
-              style={{ 
-                backgroundColor: "transparent", 
-                color: colors.darkBrown,
-                border: `2px solid ${colors.darkBrown}`
-              }}
-              className="px-6 py-3 rounded-md font-medium"
-            >
-              View Resume
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
     </Layout>
   );
