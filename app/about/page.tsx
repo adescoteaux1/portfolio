@@ -4,6 +4,7 @@ import React from 'react';
 import content from "../content/content";
 import SafeImage from '../components/safeImage';
 import Layout from '../components/layout';
+import Link from 'next/link';
 
 
 const AboutPage = () => {
@@ -384,7 +385,7 @@ const AboutPage = () => {
             >
               Get in Touch
             </a> */}
-            <a 
+            <Link 
               href="/projects"
               style={{ 
                 backgroundColor: "transparent", 
@@ -394,7 +395,7 @@ const AboutPage = () => {
               className="px-6 py-3 rounded-md font-medium"
             >
               View My Projects
-            </a>
+            </Link>
           </div>
         </div>
       </section>
