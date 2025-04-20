@@ -44,7 +44,7 @@ const ProjectFeature: React.FC<{ project: Project }> = ({ project }) => {
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex items-center gap-2 mb-2">
           <span className="text-2xl">{project.emoji}</span>
-          <h3 className="text-lg font-bold">{project.name}</h3>
+          <h3 className="text-lg font-bold"  style={{ color: colors.darkBrown }}>{project.name}</h3>
         </div>
         <p className="text-gray-600 mb-4 flex-grow line-clamp-2">{project.shortDescription}</p>
         <div className="flex flex-wrap gap-2 mb-4">

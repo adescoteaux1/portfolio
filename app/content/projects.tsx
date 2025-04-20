@@ -29,13 +29,13 @@ export const projects: Project[] = [
     dates: "January 2025 - April 2025",
     deployed: false,
     featured: true,
-    url: "",
+    github: "https://github.com/GenerateNU/arenius",
     shortDescription:
       "A carbon-accounting platform to empower small-to-medium sized businesses to track, manage, and reduce their carbon footprint.",
     longDescription:
       "Arenius is a carbon accounting web application designed for small-to-medium sized businesses. It allows users to track their carbon footprint, manage their emissions, and take steps to reduce their impact on the environment. The platform provides a user-friendly interface for businesses to input their data and receive insights into their carbon emissions. Company bank transactions are imported from their 3rd-party accounting software and their carbon footprint is estimated based on assigned carbon emission factors.",
-    cardPhoto: "/areniusCover.png",
-    coverPhotos: ["/areniusDashboard.png", "/areniusContacts.png"],
+    cardPhoto: "/areniusDashboard.jpeg",
+    coverPhotos: ["/areniusDashboard.jpeg", "/areniusGraphs.jpeg", "/areniusLogin.jpeg", "/areniusContacts.jpeg", "/areniusContact.jpeg", "/areniusLogin.jpeg", "/areniusScope.jpeg", "/AreniusReconciliation.jpeg", "/areniusDatePicker.jpeg"],
     skills: ["Go", "TypeScript", "React"],
     details: (
       <>
