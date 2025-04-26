@@ -163,7 +163,7 @@ const HomePage = () => {
             Current Roles
           </h2>
           
-          <Link href="/experience">
+          <Link href="/experiences">
             <span 
               className="text-sm font-medium flex items-center hover:underline cursor-pointer"
               style={{ color: colors.darkGreen }}
