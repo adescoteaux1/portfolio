@@ -138,19 +138,16 @@ const AboutPage = () => {
               </h2>
               <div className="prose prose-lg max-w-none">
                 <p className="mb-6">
-                  I&apos;m a Computer Science and Mathematics student at Northeastern University with a passion for building innovative, user-centered web applications and exploring the intersection of technology and sustainability.
+                  I&apos;m a Computer Science and Mathematics student at Northeastern University with a passion for building innovative, user-centered applications. My journey into technology began with my love for mathematics and solving puzzles, which naturally led me to the world of computer science where I could apply logical thinking to create solutions for real-world challenges.
                 </p>
                 <p className="mb-6">
-                  My journey in software development began during my first year at Northeastern, where I discovered my love for creating solutions that solve real-world problems. Since then, I&apos;ve had the opportunity to work on various projects, from building carbon accounting platforms to developing task management applications.
+                  Through my co-op experiences at Verisk as a DevOps QA Engineer and TJX Companies as a Risk Assurance Data and Systems Analyst, I&apos;ve gained valuable industry knowledge in automation, data engineering, and systems optimization. These experiences have strengthened my technical skills in various languages and tools including Java, SQL, Go, React, Python, and JavaScript, while providing me with insights into how software development functions in enterprise environments.
                 </p>
                 <p className="mb-6">
-                  Through my co-op experiences at Verisk Extreme Events Solutions and TJX Companies, I&apos;ve gained valuable industry knowledge in DevOps, data engineering, and systems automation. These experiences have strengthened my technical skills and provided me with insights into how software development works in enterprise environments.
+                  As a TA for Database Design, I&apos;ve developed a deeper understanding of data structures and enjoy helping others grasp complex concepts. My work with Generate, Northeastern&apos;s student-led product development studio, has allowed me to develop innovative products like Arenius, a carbon accounting web platform, and Platnm, a social music mobile application, collaborating with cross-functional teams to deliver user-centered solutions.
                 </p>
                 <p className="mb-6">
-                  As a TA for Database Design, I&apos;ve developed a deeper understanding of data structures and enjoy helping others grasp complex concepts. My work with Generate, a student-led product development studio, has allowed me to lead engineering teams and collaborate with designers to bring innovative products to life.
-                </p>
-                <p className="mb-6">
-                  When I&apos;m not coding or studying, I enjoy hiking, reading science fiction, and experimenting with new recipes. I believe that diverse interests and experiences contribute to creative problem-solving in technology.
+                  Outside of technology, I&apos;m passionate about continuous learning and creative problem-solving. I enjoy challenging myself with puzzles that require analytical thinking, much like the challenges I tackle in programming. When I&apos;m not coding or studying, you&apos;ll find me exploring hiking trails, immersed in a good book, experimenting with new baking recipes, or volunteering with organizations like Habitat for Humanity.
                 </p>
                 <p>
                   I&apos;m currently seeking opportunities where I can apply my skills and continue to grow as a developer while making meaningful contributions to projects that have positive impacts.
@@ -317,38 +314,38 @@ const AboutPage = () => {
           ></div>
           
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Sustainable Technology",
-                description: "Exploring how technology can address environmental challenges and promote sustainability.",
-                icon: "🌱"
-              },
-              {
-                title: "Data Visualization",
-                description: "Creating effective visual representations of complex datasets to extract meaningful insights.",
-                icon: "📊"
-              },
-              {
-                title: "Hiking & Outdoor Activities",
-                description: "Exploring nature trails and disconnecting from technology to recharge and find inspiration.",
-                icon: "🥾"
-              },
-              {
-                title: "Reading",
-                description: "Reading about speculative futures that explore the impact of technology on society.",
-                icon: "📚"
-              },
-              {
-                title: "Baking",
-                description: "Experimenting with recipes and techniques from different cuisines as a creative outlet.",
-                icon: "🍰"
-              },
-              {
-                title: "Open Source Contribution",
-                description: "Collaborating with the global developer community to improve and maintain public codebases.",
-                icon: "🤝"
-              }
-            ].map((interest, index) => (
+          {[
+            {
+              title: "Puzzles & Problem Solving",
+              description: "Engaging with logic puzzles, riddles, and brain teasers that challenge my analytical thinking skills.",
+              icon: "🧩"
+            },
+            {
+              title: "Reading",
+              description: "Exploring diverse genres from speculative fiction to non-fiction works about technology and society.",
+              icon: "📚"
+            },
+            {
+              title: "Baking",
+              description: "Experimenting with recipes and techniques from different cuisines as a creative outlet and way to share with others.",
+              icon: "🍰"
+            },
+            {
+              title: "Outdoor Activities",
+              description: "Hiking trails, exploring nature, and disconnecting from technology to recharge and find inspiration.",
+              icon: "🥾"
+            },
+            {
+              title: "Continuous Learning",
+              description: "Pursuing new knowledge and skills across various domains, both technical and non-technical.",
+              icon: "🧠"
+            },
+            {
+              title: "Volunteer Work",
+              description: "Contributing to community organizations including Habitat for Humanity, Stow Council on Aging, and Friends of Assabet River NWR.",
+              icon: "🤝"
+            }
+          ].map((interest, index) => (
               <div 
                 key={index}
                 style={{ 

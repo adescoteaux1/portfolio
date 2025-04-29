@@ -33,7 +33,7 @@ const HomePage = () => {
             <span style={{ color: colors.darkGreen }}>Hi, I&apos;m Ally!</span>
           </h1>
           <p className="text-lg md:text-xl mb-10 text-gray-700">
-            I&apos;m a student and aspiring software engineer with a passion for building innovative solutions and expanding my knowledge.
+            I&apos;m a student and aspiring software engineer with a passion for solving complex problems and creating innovative solutions. My love for mathematics and puzzles led me to computer science, where I enjoy applying analytical thinking to real-world challenges.
           </p>
           <div className="flex flex-wrap gap-4">
           <Link href="/about">
@@ -234,8 +234,7 @@ const HomePage = () => {
             >
               <h2 className="text-2xl md:text-3xl font-bold mb-4">About Me</h2>
               <p className="text-white text-opacity-90 mb-6">
-                I&apos;m passionate about creating technology that makes a positive impact 
-                and solving complex problems with elegant solutions.
+                I&apos;m passionate about continuous learning and creative problem-solving. When I&apos;m not coding, you&apos;ll find me solving puzzles, exploring hiking trails, or experimenting with new baking recipes.
               </p>
               <Link href="/about">
                 <button 
@@ -275,7 +274,7 @@ const HomePage = () => {
                 },
                 {
                   title: "Interests",
-                  content: "Sustainable technology, data visualization, and open source contribution"
+                  content: "Reading, puzzles, baking, and outdoor activities"
                 },
                 {
                   title: "Current Focus",
