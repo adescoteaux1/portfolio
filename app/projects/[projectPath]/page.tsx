@@ -98,7 +98,7 @@ const ProjectDetail = () => {
         <div className="mb-12">
           <Link 
             href="/projects"
-            className="inline-flex items-center mb-8 text-gray-600 hover:text-gray-900 transition-colors  hover:underline cursor-pointer"
+            className="inline-flex items-center mb-8 text-gray-600 hover:text-gray-900 transition-colors hover:underline cursor-pointer"
           >
             <ArrowLeft size={18} className="mr-2" /> Back to Projects
           </Link>
@@ -146,11 +146,11 @@ const ProjectDetail = () => {
             }}
             className="p-1"
           >
-            <div className="rounded-lg overflow-hidden border-4" style={{ borderColor: "white" }}>
+            <div className="rounded-lg overflow-hidden border-4 flex justify-center" style={{ borderColor: "white" }}>
               <SafeImage
                 src={project.cardPhoto || "/api/placeholder/1200/600"}
                 alt={project.name}
-                className="w-full h-auto"
+                className="w-full h-auto max-h-[500px] object-contain"
                 fallbackSrc="/api/placeholder/1200/600"
               />
             </div>
@@ -159,8 +159,8 @@ const ProjectDetail = () => {
         
         {/* Project Details */}
         <div className="flex flex-col md:flex-row gap-8 mb-12">
-          {/* Project Overview (Expanded to full width when no sidebar) */}
-          <div className="flex-grow order-2 md:order-1">
+          {/* Project Overview */}
+          <div className="flex-grow order-2 md:order-1 w-full">
             <div 
               style={{ 
                 backgroundColor: "white",
@@ -169,15 +169,18 @@ const ProjectDetail = () => {
                 padding: "24px",
                 boxShadow: "0 4px 15px rgba(0, 0, 0, 0.05)",
               }}
+              className="w-full"
             >
               <h2 className="text-2xl font-bold mb-6" style={{ color: colors.darkBrown }}>
                 Overview
               </h2>
-              <div className="prose prose-lg max-w-none text-gray-700">
+              <div className="prose prose-lg w-full max-w-none text-gray-700">
                 <p className="mb-6">{project.longDescription}</p>
                 
                 {/* Project Details Content */}
-                {project.details}
+                <div className="w-full">
+                  {project.details}
+                </div>
                 
                 {/* Future Plans (if any) */}
                 {project.future && (
@@ -185,7 +188,9 @@ const ProjectDetail = () => {
                     <h3 className="text-xl font-bold mt-8 mb-4">
                       Future Plans
                     </h3>
-                    {project.future}
+                    <div className="w-full">
+                      {project.future}
+                    </div>
                   </>
                 )}
               </div>
@@ -404,7 +409,7 @@ const ProjectDetail = () => {
                   <div className="p-4">
                     <div className="flex items-center mb-2">
                       <span className="text-xl mr-2">{otherProject.emoji}</span>
-                      <h3 className="font-bold">{otherProject.name}</h3>
+                      <h3 className="font-bold" style={{ color: colors.lightBrown }}>{otherProject.name}</h3>
                     </div>
                   </div>
                 </Link>

@@ -36,30 +36,23 @@ export const projects: Project[] = [
       "Arenius is a carbon accounting web application designed for small-to-medium sized businesses. It allows users to track their carbon footprint, manage their emissions, and take steps to reduce their impact on the environment. The platform provides a user-friendly interface for businesses to input their data and receive insights into their carbon emissions. Company bank transactions are imported from their 3rd-party accounting software and their carbon footprint is estimated based on assigned carbon emission factors.",
     cardPhoto: "/areniusDashboard.jpeg",
     coverPhotos: ["/areniusDashboard.jpeg", "/areniusGraphs.jpeg", "/areniusLogin.jpeg", "/areniusContacts.jpeg", "/areniusContact.jpeg", "/areniusLogin.jpeg", "/areniusScope.jpeg", "/AreniusReconciliation.jpeg", "/areniusDatePicker.jpeg"],
-    skills: ["Go", "TypeScript", "React"],
+    skills: ["Go", "TypeScript", "React", "Supabase", "Xero API", "ClimatIQ API"],
     details: (
       <>
         <div className="tablet:flex justify-between">
           <div className="flex flex-col gap-8 mr-8">
-            <p>
-              This app was developed for a real client as part of Generate at
-              Northeastern, a student-led product development studio. As one of
-              two tech leads, I managed a team of 5 engineers and created
-              tickets, reviewed code, and engineered features. We worked
-              alongside a team of designers, helping to bring their visuals to
-              life in a responsive and efficient web application.
+          <p>
+              As an engineer on the Arenius project at Generate (Northeastern&apos;s student-led product development studio), I focused on building robust backend systems and creating intuitive data visualizations. Working with a cross-functional team of designers and engineers, we delivered a fully-functional carbon accounting platform that helps businesses understand and reduce their environmental impact.
             </p>
             <p>
-              The engineering team began by building the backend in Go and
-              integrating with external APIs. Specifically, we integrated with
-              Xero, an accounting API, and Climatiq, a carbon accounting API for
-              estimating carbon emissions based on financial transactions. Once
-              the design team created Figma mockups, we built the front-end
-              using React, Next.js, Tailwind, and the shadcn component library.
+              My key contributions included implementing a secure authentication system using Supabase Auth that enabled user registration, login, password reset, and account deletion. I created a critical automated data synchronization system using a cron job that runs nightly to import new transactions and contacts from Xero, ensuring users always have up-to-date information. On the frontend, I handled cookie management and middleware to maintain user sessions and implemented batch updates to optimize performance.
+            </p>
+            <p>
+              I also developed several key data visualization components, including the contact details page, top emissions factors graph, and contact distribution tree map. To enhance user experience, I added loading spinners and tooltips throughout the application, making complex carbon accounting data more accessible and understandable for users.
             </p>
           </div>
           <SafeImage
-            src={"/areniusTeam.jpg"}
+            src={"/areniusTeam.jpeg"}
             alt="Team working on the Arenius project"
             className="tablet:w-2/5 tablet:h-[350px]"
           />
@@ -73,51 +66,109 @@ export const projects: Project[] = [
       </>
     ),
   },
+  {
+    name: "Husky404",
+    path: "husky404",
+    emoji: "🐶",
+    dates: "Oct 2024 - Dec 2024",
+    deployed: true,
+    featured: false,
+    github: "https://github.com/adescoteaux1/Husky404",
+    url: "https://cs4530-f24-508.onrender.com",
+    shortDescription:
+    "An enhanced Stack Overflow clone with Markdown/LaTeX support, SSO authentication system, and comprehensive accessibility features to improve user experience.",
+  longDescription:
+    "Husky404 is a feature-rich Stack Overflow clone built for a Software Engineering course project. As part of a four-person development team, I helped implement three major features: a Markdown editor with LaTeX support for professional content formatting, a secure authentication system with role-based access control, and comprehensive accessibility options. The platform enables users to create, edit, and save posts with live previews, manage their profiles securely, and customize their browsing experience with personalized accessibility settings.",
+  cardPhoto: "/huskyHome.png",
+  coverPhotos: ["/huskyHome.png", "/huskyTags.png", "/huskyQuestion.png", "/huskyAccessibility.png", "/huskyLatex.png", "/huskyPreview.png", "/huskyManage.png"],
+  skills: ["TypeScript", "React", "Node.js", "MongoDB", "Material UI", "Markdown", "LaTeX"],
+  details: (
+    <>
+      <div className="tablet:flex justify-between">
+        <div className="flex flex-col gap-8 mr-8">
+          <p>
+            As part of a four-person development team for our Software Engineering course, I contributed to building Husky404, an enhanced Stack Overflow clone with advanced features that dramatically improve content creation and user experience. We followed agile methodologies with regular sprint planning, reviews, and retrospectives to ensure consistent progress and quality.
+          </p>
+          <p>
+            My primary contributions focused on the authentication system and user management functionality. I implemented a secure user authentication system that supports multiple roles (standard users, moderators, and owners) with appropriate permission controls. For moderators, I created specialized actions allowing them to pin important questions, lock posts to prevent further answers, and delete inappropriate content. For owners, I developed an account management interface that enables searching through user accounts and assigning different roles.
+          </p>
+          <p>
+            I also contributed to the profile page implementation, creating a personalized dashboard where users can view their activity, access their previously created posts, and manage draft content. The user-specific settings storage system I helped develop ensures that accessibility preferences (including theme selection, font size, and screen reader settings) persist across sessions, providing a consistent experience for returning users.
+          </p>
+          <p>
+            During the development process, we transitioned from our original UI components to Material UI to improve screen reader compatibility and overall accessibility. This required refactoring existing code while maintaining functionality, a challenge that improved my skills in component migration and accessibility implementation. The final product delivers a professional platform with seven theme options, customizable font sizes, and built-in screen reader support.
+          </p>
+          </div>
+        </div>
+      </>
+    ),
+  },
     {
       name: "Platnm",
       path: "platnm",
       emoji: "🎶",
-      dates: "January 2025 - April 2025",
+      dates: "Sept 2024 - Dec 2024",
       deployed: false,
       featured: true,
+      github: "https://github.com/GenerateNU/platnm",
       url: "",
       shortDescription:
-        "A carbon-accounting platform to empower small-to-medium sized businesses to track, manage, and reduce their carbon footprint.",
+        "A social music platform that allows users to discover, rate, and review music while connecting with friends through shared musical interests and personalized recommendations.",
       longDescription:
-        "Arenius is a carbon accounting web application designed for small-to-medium sized businesses. It allows users to track their carbon footprint, manage their emissions, and take steps to reduce their impact on the environment. The platform provides a user-friendly interface for businesses to input their data and receive insights into their carbon emissions. Company bank transactions are imported from their 3rd-party accounting software and their carbon footprint is estimated based on assigned carbon emission factors.",
-      cardPhoto: "/platnmCover.png",
-      coverPhotos: ["/areniusDashboard.png", "/areniusContacts.png"],
-      skills: ["Go", "TypeScript", "React"],
+        "Platnm is a social musicmobile application that transforms how users discover and engage with music. As part of the engineering team, I implemented core social features including the following system, personalized recommendations, and review functionality. The app integrates with Spotify's API to expand the music database dynamically and provides a social feed where users can interact with reviews from people they follow, view detailed statistics, and engage through comments and voting.",
+      cardPhoto: "/platnmFeed.png",
+      coverPhotos: ["/platnmFeed.png", "/platnmSong.png", "/platnmSearch.png", "/platnmSongReview.png", "/platnmFriend.png", "/platnmUser.png"],
+      skills: ["Go", "TypeScript", "React Native", "Supabase", "Spotify API"],
       details: (
         <>
           <div className="tablet:flex justify-between">
-            <div className="flex flex-col gap-8 mr-8 w-3/5">
+            <div className="flex flex-col gap-8 mr-8">
               <p>
-                This app was developed for a real client as part of Generate at
-                Northeastern, a student-led product development studio. As one of
-                two tech leads, I managed a team of 5 engineers and created
-                tickets, reviewed code, and engineered features. We worked
-                alongside a team of designers, helping to bring their visuals to
-                life in a responsive and efficient web application.
+                As an engineer on the Platnm project at Generate, I implemented core social networking functionality that powers the platform&apos;s user experience. I developed the entire following/unfollowing system on both the backend and frontend, allowing users to connect with friends and discover new music through their network.
               </p>
               <p>
-                The engineering team began by building the backend in Go and
-                integrating with external APIs. Specifically, we integrated with
-                Xero, an accounting API, and Climatiq, a carbon accounting API for
-                estimating carbon emissions based on financial transactions. Once
-                the design team created Figma mockups, we built the front-end
-                using React, Next.js, Tailwind, and the shadcn component library.
+                I created the recommendation engine that suggests new music and users to follow based on listening habits and social connections. To enhance the review system, I built features for drafting reviews, adding tags, and managing the review lifecycle. One of the most technically challenging aspects was implementing Spotify API integration that automatically pulls in new songs and artists when search results in our database fell below five items, significantly expanding our music catalog without manual intervention.
               </p>
               <p>
-                This was my first time learning about the carbon accounting space
-                and making a data-focused app that revolves around visualizations.
-                It was very rewarding to work on this project with my team and
-                complete all of the features that we set out to accomplish.
+                The social feed was another key contribution, showing reviews from followed users and enabling interactions through upvotes/downvotes and comments. I also developed the media statistics page that breaks down reviews by category (your reviews, friends&apos; reviews, and all reviews) for every song with detailed statistics for each grouping. These features created a dynamic, engaging platform where users can discover new music through their social connections and meaningful reviews.
               </p>
             </div>
-            <SafeImage src={"/areniusTeam.jpg"} className=" w-2/5" alt="Team working on the Arenius project" />
           </div>
         </>
       ),
     },
+    {
+      name: "BuJo Bullet Journal",
+      path: "bujo-journal",
+      emoji: "📝",
+      dates: "March 2024 - April 2024",
+      deployed: false,
+      featured: false,
+      github: "https://github.com/adescoteaux1/BulletJournal",
+      shortDescription:
+        "A digital bullet journal application that helps users organize their weekly schedule with a clean, visually appealing interface and intuitive task management system.",
+      longDescription:
+        "The BuJo Bullet Journal App is a Java-based desktop application designed to bring the functionality of a traditional bullet journal to digital form. Built using JavaFX, the application follows SOLID principles and implements a robust MVC architecture. Users can create, edit, and organize tasks and events throughout their week, mark completion status, and save their journals as .bujo files for later use. The clean purple-lilac theme creates a positive environment that encourages productivity and organization.",
+      cardPhoto: "/bujoWeek.png",
+      coverPhotos: ["/bujoWeek.png", "/bujoData.png", "/bujoEvent.png"],
+      skills: ["Java", "JavaFX", "FXML", "Object-Oriented Design", "MVC Architecture", "SOLID Principles"],
+      details: (
+        <>
+          <div className="flex flex-col gap-8">
+            <p>
+              As part of CS3200 Object Oriented Design, I collaborated with teammates to create the BuJo Bullet Journal App, a digital organization tool that brings the functionality of a traditional bullet journal to desktop users. This project challenged us to apply SOLID principles and implement a clean MVC architecture while delivering an intuitive user experience.
+            </p>
+            <p>
+              The application features a weekly view where users can visualize their schedule with tasks and events organized by day. Each action (task or event) includes a name, optional description, and assigned day, with events having start and end times and tasks having completion status. All tasks appear in a dedicated Task Queue that serves as a to-do list, allowing users to quickly track their progress throughout the week.
+            </p>
+            <p>
+              My primary contributions included implementing the View components using JavaFX and FXML, designing the user interface with a light purple-lilac theme, and ensuring the application followed the Single Responsibility and Interface Segregation principles. I developed the UserInputView class that handles the initial scene where users can create or load journals, as well as the event and task creation interfaces that validate user input before passing data to the controller.
+            </p>
+            <p>
+              A key technical achievement was establishing a clean separation between the view, controller, and model components, allowing for extensibility while maintaining a closed core codebase. The project demonstrates how effective object-oriented design can lead to a maintainable and flexible application structure, with classes like Event and Task extending an abstract Action class to share common functionality while implementing their unique behaviors.
+            </p>
+          </div>
+        </>
+      ),
+    }
 ];

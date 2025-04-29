@@ -203,7 +203,7 @@ const ProjectsPage = () => {
                           }}
                           className="px-4 py-2 rounded-md text-sm font-medium flex items-center transition-transform hover:transform hover:scale-105"
                         >
-                          Live Demo
+                          Live
                         </a>
                       )}
                     </div>
