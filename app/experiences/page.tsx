@@ -147,12 +147,12 @@ const ExperiencePage: React.FC = () => {
                 {
                   category: "Technical Skills",
                   skills: [
-                    "Full-Stack Web Development",
+                    "Full-Stack Web and Mobile Development",
                     "Data Engineering & Analysis",
                     "Database Design & Management",
                     "DevOps & Automation",
                     "Software Testing & Quality Assurance",
-                    "Version Control (Git)"
+                    "Version Control (Git)",
                   ]
                 },
                 {

@@ -1,12 +1,29 @@
 export const experience = [
   {
+    position: "Mobile Software Engineer",
+    company: "Familia IO",
+    location: "Remote",
+    category: "Work Experience",
+    image: "/familia_io_logo.jpeg",
+    date: "May 2025 - Present",
+    linkText: "joinsangha.com",
+    linkURL: "https://www.joinsangha.com",
+    bullets: [
+      "Started from Scratch to build a mobile application for Familia IO, a startup focused on mental health and exploring mindfulness practices.",
+      "Developed a cross-platform mobile application using React Native, TypeScript, and Expo, ensuring a seamless user experience on both iOS and Android devices.",
+      "Implemented features such as user authentication, personalized content delivery, and interactive mindfulness exercises.",
+      "Collaborated with a small team of developers and designers to create a user-friendly interface and ensure the app's functionality met user needs.",
+    ],
+    showMore: true,
+  },
+  {
     position: "DevOps Automation QA Co-op",
     shortPosition: "DevOps Co-op",
     company: "Verisk Extreme Events Solutions",
     location: "Boston, MA",
     category: "Work Experience",
     image: "/verisk.png",
-    date: "Jan 2025 - Present",
+    date: "Jan 2025 - June 2025",
     linkText: "verisk.com",
     linkURL: "https://www.verisk.com/company/newsroom/tags/extreme-event-solutions/",
     bullets: [
