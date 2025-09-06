@@ -270,7 +270,7 @@ const HomePage = () => {
               {[
                 {
                   title: "Education",
-                  content: "BS in Computer Science and Mathematics at Northeastern University"
+                  content: "BS/MS in Computer Science and Mathematics at Northeastern University"
                 },
                 {
                   title: "Interests",
