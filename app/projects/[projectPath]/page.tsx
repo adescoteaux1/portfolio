@@ -246,6 +246,21 @@ const ProjectDetail = () => {
                     View Live Project
                   </a>
                 )}
+                {project.presentation && (
+                  <a
+                    href={project.presentation}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center py-2 px-4 rounded-md transition-colors w-full hover:brightness-110"
+                    style={{ 
+                      backgroundColor: colors.darkGreen,
+                      color: "white" 
+                    }}
+                  >
+                    <ExternalLink size={20} className="mr-2" />
+                    View Presentation
+                  </a>
+                )}
               </div>
             </div>
             
