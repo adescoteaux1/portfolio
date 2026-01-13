@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BookOpen, FileText, Globe, File, ExternalLink, Star, CheckCircle, Clock, Bookmark } from 'lucide-react';
 import { brainDump, Resource } from '@/app/content/braindump';
+import { AddBrainDumpForm } from '../components/AddBrainDumpForm';
 
 const BrainDumpPage = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -17,6 +18,43 @@ const BrainDumpPage = () => {
     mysticalGlow: '#6dd5a8',
     darkBg: '#0f1e16'
   };
+
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const submitToGoogleForm = async (form: {
+    url: string;
+    title?: string;
+    category?: string;
+    type?: string;
+    notes?: string;
+    addedBy?: string;
+  }) => {
+    const formUrl =
+      "https://docs.google.com/forms/d/e/1FAIpQLSdnSvw0XPv_DS8KuWZsIu4C7adQ3er3VYlvpm3N9hzX0Yr1cw/formResponse";
+
+    const body = new URLSearchParams({
+      "entry.1979115312": form.url,
+      "entry.1302302683": form.title || "",
+      "entry.1567864519": form.category || "",
+      "entry.346061128": form.type || "",
+      "entry.44930186": form.notes || "",
+      "entry.685666409": form.addedBy || "",
+    });
+
+    await fetch(formUrl, {
+      method: "POST",
+      mode: "no-cors",
+      body,
+    });
+
+    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(false);
+      setShowAddModal(false);
+    }, 2000);
+  };
+
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -522,6 +560,74 @@ const BrainDumpPage = () => {
           </div>
         </div>
       </div>
+      <button
+        onClick={() => setShowAddModal(true)}
+        style={{
+          position: "fixed",
+          bottom: "32px",
+          right: "32px",
+          padding: "14px 18px",
+          borderRadius: "999px",
+          background: colors.mysticalGlow,
+          color: colors.darkBg,
+          fontWeight: 600,
+          fontSize: "14px",
+          border: "none",
+          cursor: "pointer",
+          boxShadow: `0 0 20px ${colors.mysticalGlow}80`,
+          zIndex: 50,
+        }}
+      >
+        ✨ Add to Brain Dump
+      </button>
+
+      {showAddModal && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.6)",
+            backdropFilter: "blur(6px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 100,
+          }}
+        >
+          <div
+            style={{
+              background: colors.darkBg,
+              border: `1px solid ${colors.mysticalGlow}60`,
+              borderRadius: "12px",
+              padding: "32px",
+              width: "100%",
+              maxWidth: "420px",
+              boxShadow: `0 0 40px ${colors.mysticalGlow}30`,
+            }}
+          >
+            {!submitted ? (
+              <AddBrainDumpForm onSubmit={submitToGoogleForm} />
+            ) : (
+              <div style={{ textAlign: "center" }}>
+                <p
+                  style={{
+                    fontSize: "20px",
+                    color: colors.mysticalGlow,
+                    marginBottom: "8px",
+                  }}
+                >
+                  Saved to the void 🌙
+                </p>
+                <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px" }}>
+                  You can curate it later
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+
     </div>
   );
 };
