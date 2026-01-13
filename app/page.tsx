@@ -586,7 +586,7 @@ const EnchantedPortfolio = () => {
           }}
           className="fixed bottom-6 right-6 px-4 py-3 rounded-full shadow-lg hover:opacity-90 transition-opacity"
         >
-          Old Home
+          Old Site
         </button>
       </Link>
 
