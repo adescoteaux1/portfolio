@@ -163,7 +163,7 @@ const ProjectsPage = () => {
                     </div>
                     <div className="flex space-x-3 mt-auto">
                       <a
-                        href={`/projects/${project.path}`}
+                        href={`/oldprojects/${project.path}`}
                         style={{ 
                           backgroundColor: colors.darkGreen,
                           color: "white",
@@ -291,7 +291,7 @@ const ProjectsPage = () => {
                   </div>
                   <div className="flex space-x-4">
                     <a
-                      href={`/projects/${content.projects.filter(p => p.featured)[0].path}`}
+                      href={`/oldprojects/${content.projects.filter(p => p.featured)[0].path}`}
                       style={{ 
                         backgroundColor: colors.darkBrown,
                         color: "white",

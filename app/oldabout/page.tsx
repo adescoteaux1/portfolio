@@ -383,7 +383,7 @@ const AboutPage = () => {
               Get in Touch
             </a> */}
             <Link 
-              href="/projects"
+              href="/oldprojects"
               style={{ 
                 backgroundColor: "transparent", 
                 color: colors.darkBrown,

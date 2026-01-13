@@ -75,7 +75,7 @@ const ProjectDetail = () => {
           <h1 className="text-3xl font-bold mb-6">Project Not Found</h1>
           <p className="mb-8">Sorry, we couldn&apos;t find the project you&apos;re looking for.</p>
           <Link 
-            href="/projects"
+            href="/oldprojects"
             className="inline-flex items-center px-6 py-3 rounded-md font-medium"
             style={{ backgroundColor: colors.darkGreen, color: 'white' }}
           >
@@ -97,7 +97,7 @@ const ProjectDetail = () => {
         {/* Project Header */}
         <div className="mb-12">
           <Link 
-            href="/projects"
+            href="/oldprojects"
             className="inline-flex items-center mb-8 text-gray-600 hover:text-gray-900 transition-colors hover:underline cursor-pointer"
           >
             <ArrowLeft size={18} className="mr-2" /> Back to Projects
@@ -403,7 +403,7 @@ const ProjectDetail = () => {
               .map((otherProject) => (
                 <Link
                   key={otherProject.path}
-                  href={`/projects/${otherProject.path}`}
+                  href={`/oldprojects/${otherProject.path}`}
                   style={{ 
                     backgroundColor: "white",
                     borderRadius: "8px",

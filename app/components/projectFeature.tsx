@@ -63,7 +63,7 @@ const ProjectFeature: React.FC<{ project: Project }> = ({ project }) => {
         </div>
         <div className="mt-auto">
           <Link
-            href={`/projects/${project.path}`}
+            href={`/oldprojects/${project.path}`}
             style={{ 
               backgroundColor: colors.darkGreen,
               color: "white"
