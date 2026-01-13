@@ -1,26 +1,55 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
-"use client"
+"use client";
 
+/* eslint-disable @next/next/no-html-link-for-pages */
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Github, Linkedin, Mail, Code, User, Briefcase, Heart, Brain, BookOpen, Film, Music, GraduationCap } from 'lucide-react';
 
 const EnchantedPortfolio = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [copiedMessage, setCopiedMessage] = useState(false);
+  const [buttonOpacities, setButtonOpacities] = useState<Record<string, number>>({});
 
   const colors = {
-    deepForest: '#1a3d2e',
-    darkGreen: '#2d5942',
-    mediumGreen: '#4a7c59',
     mysticalGlow: '#6dd5a8',
-    darkBg: '#0f1e16'
+    darkBg: '#000000'
   };
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      
+      const buttons = document.querySelectorAll('[data-button-id]');
+      const newOpacities: Record<string, number> = {};
+      
+      buttons.forEach((button) => {
+        const rect = button.getBoundingClientRect();
+        const buttonCenterX = rect.left + rect.width / 2;
+        const buttonCenterY = rect.top + rect.height / 2;
+        
+        const distance = Math.sqrt(
+          Math.pow(e.clientX - buttonCenterX, 2) + 
+          Math.pow(e.clientY - buttonCenterY, 2)
+        );
+        
+        const maxDistance = 300;
+        const fadeStart = 200;
+        
+        let opacity = 0;
+        if (distance < fadeStart) {
+          opacity = 1;
+        } else if (distance < maxDistance) {
+          opacity = 1 - ((distance - fadeStart) / (maxDistance - fadeStart));
+        }
+        
+        const buttonId = button.getAttribute('data-button-id');
+        if (buttonId) {
+          newOpacities[buttonId] = opacity;
+        }
+      });
+      
+      setButtonOpacities(newOpacities);
     };
+    
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
@@ -29,6 +58,39 @@ const EnchantedPortfolio = () => {
     navigator.clipboard.writeText('descoteaux.a@northeastern.edu');
     setCopiedMessage(true);
     setTimeout(() => setCopiedMessage(false), 800);
+  };
+
+  const buttonBaseStyle = {
+    background: 'transparent',
+    border: `1px solid ${colors.mysticalGlow}60`,
+    borderRadius: '8px',
+    padding: '15px 20px',
+    fontSize: '16px',
+    color: colors.mysticalGlow,
+    textDecoration: 'none',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    width: '100%',
+    fontFamily: 'inherit',
+    transform: 'scale(1)',
+    boxShadow: '0 0 0px transparent'
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+    e.currentTarget.style.background = `${colors.mysticalGlow}10`;
+    e.currentTarget.style.borderColor = colors.mysticalGlow;
+    e.currentTarget.style.transform = 'scale(1.05) translateY(-2px)';
+    e.currentTarget.style.boxShadow = `0 0 20px ${colors.mysticalGlow}40, 0 5px 15px rgba(0,0,0,0.3)`;
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+    e.currentTarget.style.background = 'transparent';
+    e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
+    e.currentTarget.style.transform = 'scale(1) translateY(0)';
+    e.currentTarget.style.boxShadow = '0 0 0px transparent';
   };
 
   return (
@@ -44,7 +106,7 @@ const EnchantedPortfolio = () => {
       alignItems: 'center',
       justifyContent: 'center'
     }}>
-      {/* Animated background stars */}
+      {/* Background stars */}
       <div style={{
         position: 'fixed',
         top: 0,
@@ -80,18 +142,18 @@ const EnchantedPortfolio = () => {
         })}
       </div>
 
-      {/* Cursor glow effect */}
+      {/* Flashlight effect */}
       <div style={{
         position: 'fixed',
-        width: '500px',
-        height: '500px',
+        width: '800px',
+        height: '800px',
         borderRadius: '50%',
-        background: `radial-gradient(circle, ${colors.mysticalGlow}25 0%, ${colors.mysticalGlow}10 40%, transparent 70%)`,
+        background: `radial-gradient(circle, ${colors.mysticalGlow}40 0%, ${colors.mysticalGlow}20 30%, ${colors.mysticalGlow}05 50%, transparent 70%)`,
         pointerEvents: 'none',
         transform: 'translate(-50%, -50%)',
         left: `${mousePosition.x}px`,
         top: `${mousePosition.y}px`,
-        transition: 'left 0.15s ease-out, top 0.15s ease-out',
+        transition: 'left 0.1s ease-out, top 0.1s ease-out',
         zIndex: 1
       }} />
 
@@ -104,22 +166,6 @@ const EnchantedPortfolio = () => {
             75% { transform: translate(-10px, -5px); }
           }
           
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-          }
-
           @keyframes twinkle {
             0%, 100% { 
               opacity: 0.3;
@@ -138,7 +184,7 @@ const EnchantedPortfolio = () => {
         `}
       </style>
 
-      {/* Main Content - Abstract Layout */}
+      {/* Main Content */}
       <div style={{ 
         position: 'relative', 
         zIndex: 2,
@@ -146,11 +192,14 @@ const EnchantedPortfolio = () => {
         padding: '40px'
       }}>
         {/* Name */}
-        <div style={{
-          marginBottom: '60px',
-          animation: 'fadeInUp 0.8s ease-out',
-          textAlign: 'center'
-        }}>
+        <div 
+          data-button-id="name"
+          style={{
+            marginBottom: '60px',
+            textAlign: 'center',
+            opacity: buttonOpacities['name'] || 0,
+            transition: 'opacity 0.15s ease-out'
+          }}>
           <h1 style={{
             fontSize: '64px',
             fontWeight: '400',
@@ -166,7 +215,7 @@ const EnchantedPortfolio = () => {
           </h1>
         </div>
 
-        {/* Abstract Grid Layout */}
+        {/* Grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
@@ -174,37 +223,20 @@ const EnchantedPortfolio = () => {
           maxWidth: '600px',
           margin: '0 auto'
         }}>
-          {/* Email - spans 2 columns */}
-          <div style={{ 
-            gridColumn: 'span 2',
-            position: 'relative',
-            animation: 'fadeInUp 0.8s ease-out 0.1s both'
-          }}>
+          {/* Email */}
+          <div 
+            data-button-id="email"
+            style={{ 
+              gridColumn: 'span 2',
+              position: 'relative',
+              opacity: buttonOpacities['email'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
             <button
               onClick={copyEmail}
-              style={{
-                background: 'transparent',
-                border: `1px solid ${colors.mysticalGlow}60`,
-                borderRadius: '8px',
-                padding: '15px 20px',
-                fontSize: '16px',
-                color: colors.mysticalGlow,
-                cursor: 'pointer',
-                transition: 'all 0.3s',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                width: '100%',
-                fontFamily: 'inherit'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-                e.currentTarget.style.borderColor = colors.mysticalGlow;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-              }}
+              style={buttonBaseStyle}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
               <Mail size={18} />
               <span>Email</span>
@@ -229,367 +261,248 @@ const EnchantedPortfolio = () => {
           </div>
 
           {/* LinkedIn */}
-          <a
-            href="https://www.linkedin.com/in/alexandradescoteaux/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <div 
+            data-button-id="linkedin"
             style={{
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 0.2s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <Linkedin size={18} />
-          </a>
+              opacity: buttonOpacities['linkedin'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="https://www.linkedin.com/in/alexandradescoteaux/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{...buttonBaseStyle, justifyContent: 'center'}}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Linkedin size={18} />
+            </a>
+          </div>
 
           {/* GitHub */}
-          <a
-            href="https://github.com/adescoteaux1"
-            target="_blank"
-            rel="noopener noreferrer"
+          <div 
+            data-button-id="github"
             style={{
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 0.3s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <Github size={18} />
-          </a>
+              opacity: buttonOpacities['github'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="https://github.com/adescoteaux1"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{...buttonBaseStyle, justifyContent: 'center'}}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Github size={18} />
+            </a>
+          </div>
 
-          {/* Projects - spans 2 columns */}
-          <a
-            href="/projects"
+          {/* Projects */}
+          <div 
+            data-button-id="projects"
             style={{
               gridColumn: 'span 2',
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 0.4s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <Code size={18} />
-            <span>Projects</span>
-          </a>
+              opacity: buttonOpacities['projects'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="/projects"
+              style={buttonBaseStyle}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Code size={18} />
+              <span>Projects</span>
+            </a>
+          </div>
 
           {/* About */}
-          <a
-            href="/about"
+          <div 
+            data-button-id="about"
             style={{
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 0.5s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <User size={18} />
-          </a>
+              opacity: buttonOpacities['about'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="/about"
+              style={{...buttonBaseStyle, justifyContent: 'center'}}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <User size={18} />
+            </a>
+          </div>
 
           {/* Experience */}
-          <a
-            href="/experience"
+          <div 
+            data-button-id="experience"
             style={{
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 0.6s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <Briefcase size={18} />
-            <span>Experience</span>
-          </a>
+              opacity: buttonOpacities['experience'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="/experience"
+              style={buttonBaseStyle}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Briefcase size={18} />
+              <span>Experience</span>
+            </a>
+          </div>
 
           {/* Interests */}
-          <a
-            href="/interests"
+          <div 
+            data-button-id="interests"
             style={{
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 0.7s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <Heart size={18} />
-            <span>Interests</span>
-          </a>
+              opacity: buttonOpacities['interests'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="/interests"
+              style={buttonBaseStyle}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Heart size={18} />
+              <span>Interests</span>
+            </a>
+          </div>
 
-          {/* Brain Dump - spans 2 columns */}
-          <a
-            href="/brain-dump"
+          {/* Brain Dump */}
+          <div 
+            data-button-id="brain-dump"
             style={{
               gridColumn: 'span 2',
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 0.8s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <Brain size={18} />
-            <span>Brain Dump</span>
-          </a>
+              opacity: buttonOpacities['brain-dump'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="/brain-dump"
+              style={buttonBaseStyle}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Brain size={18} />
+              <span>Brain Dump</span>
+            </a>
+          </div>
 
           {/* Reading */}
-          <a
-            href="/reading"
+          <div 
+            data-button-id="reading"
             style={{
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 0.9s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <BookOpen size={18} />
-          </a>
+              opacity: buttonOpacities['reading'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="/reading"
+              style={{...buttonBaseStyle, justifyContent: 'center'}}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <BookOpen size={18} />
+            </a>
+          </div>
 
           {/* Watch List */}
-          <a
-            href="/watch-list"
+          <div 
+            data-button-id="watch-list"
             style={{
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 1s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <Film size={18} />
-          </a>
+              opacity: buttonOpacities['watch-list'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="/watch-list"
+              style={{...buttonBaseStyle, justifyContent: 'center'}}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Film size={18} />
+            </a>
+          </div>
 
           {/* Music */}
-          <a
-            href="/music"
+          <div 
+            data-button-id="music"
             style={{
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 1.1s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <Music size={18} />
-          </a>
+              opacity: buttonOpacities['music'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="/music"
+              style={{...buttonBaseStyle, justifyContent: 'center'}}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Music size={18} />
+            </a>
+          </div>
 
-          {/* Education - spans all 3 columns */}
-          <a
-            href="/education"
+          {/* Education */}
+          <div 
+            data-button-id="education"
             style={{
               gridColumn: 'span 3',
-              background: 'transparent',
-              border: `1px solid ${colors.mysticalGlow}60`,
-              borderRadius: '8px',
-              padding: '15px 20px',
-              fontSize: '16px',
-              color: colors.mysticalGlow,
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              animation: 'fadeInUp 0.8s ease-out 1.2s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${colors.mysticalGlow}10`;
-              e.currentTarget.style.borderColor = colors.mysticalGlow;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = `${colors.mysticalGlow}60`;
-            }}
-          >
-            <GraduationCap size={18} />
-            <span>Education</span>
-          </a>
+              opacity: buttonOpacities['education'] || 0,
+              transition: 'opacity 0.15s ease-out'
+            }}>
+            <a
+              href="/education"
+              style={{...buttonBaseStyle, justifyContent: 'center'}}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <GraduationCap size={18} />
+              <span>Education</span>
+            </a>
+          </div>
         </div>
       </div>
-      <Link href="/oldHome">
-        <button
-          style={{ 
-            backgroundColor: '#5C6D63', // dark green
-            color: 'white'
+      
+      {/* Old Site Button */}
+      <div
+        data-button-id="old-site"
+        style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          opacity: buttonOpacities['old-site'] || 0,
+          transition: 'opacity 0.15s ease-out',
+          zIndex: 10
+        }}>
+        <a
+          href="/oldHome"
+          style={{
+            display: 'block',
+            backgroundColor: '#5C6D63',
+            color: 'white',
+            padding: '12px 16px',
+            borderRadius: '9999px',
+            border: 'none',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            cursor: 'pointer',
+            fontFamily: 'inherit',
+            fontSize: '16px',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease',
+            transform: 'scale(1)'
           }}
-          className="fixed bottom-6 right-6 px-4 py-3 rounded-full shadow-lg hover:opacity-90 transition-opacity"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#4a5950';
+            e.currentTarget.style.transform = 'scale(1.05) translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 0 20px rgba(92, 109, 99, 0.5), 0 15px 25px -5px rgba(0, 0, 0, 0.3)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#5C6D63';
+            e.currentTarget.style.transform = 'scale(1) translateY(0)';
+            e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+          }}
         >
           Old Site
-        </button>
-      </Link>
-
+        </a>
+      </div>
     </div>
   );
 };
