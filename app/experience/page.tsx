@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Briefcase, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
 import { experience } from '../content/experience';
 
+
 const ExperiencePage = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>({});
@@ -28,12 +29,12 @@ const ExperiencePage = () => {
 
   const workExperience = experience.filter(exp => exp.category !== 'Academics');
 
-
   const categories = [...new Set(workExperience.map(item => item.category))];
 
   const filteredExperience = filter === 'all'
     ? workExperience
     : workExperience.filter(item => item.category === filter);
+
   const toggleExpanded = (index: number) => {
     setExpandedItems(prev => ({
       ...prev,
@@ -127,8 +128,12 @@ const ExperiencePage = () => {
             marginBottom: '40px',
             transition: 'opacity 0.3s'
           }}
-          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
-          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.opacity = '0.7';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.opacity = '1';
+          }}
         >
           ← Back
         </Link>
@@ -250,14 +255,6 @@ const ExperiencePage = () => {
                   {expandedItems[index] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                 </div>
               </div>
-
-              {/* <p style={{ 
-                color: 'rgba(255, 255, 255, 0.7)',
-                fontSize: '15px',
-                marginBottom: expandedItems[index] ? '16px' : '0'
-              }}>
-                {item.description}
-              </p> */}
 
               {expandedItems[index] && (
                 <ul style={{ 

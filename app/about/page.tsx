@@ -271,12 +271,21 @@ const AboutPage = () => {
           }}>
             Skills
           </h2>
+          <h3 style={{
+            fontSize: '18px',
+            fontWeight: '600',
+            marginBottom: '15px',
+            color: 'rgba(255, 255, 255, 0.9)'
+          }}>
+            Languages
+          </h3>
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
             gap: '10px',
             marginBottom: '30px'
           }}>
+            
             {skills.map((skillObj, i) => (
               <span
                 key={i}

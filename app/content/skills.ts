@@ -7,4 +7,7 @@ export const skills = [
   { skill: "JavaScript", image: "javascript.png" },
   { skill: "TypeScript", image: "typescript.png" },
   { skill: "HTML/CSS", image: "htmlcss.png" },
+  { skill: "Swift", image: "swift.png" },
+  { skill: "OCaml", image: "swift.png" },
+  { skill: "C", image: "swift.png" },
 ];

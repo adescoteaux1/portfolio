@@ -6,4 +6,10 @@ export const frameworks = [
   { skill: "Git", image: "git.png" },
   { skill: "Docker", image: "docker.png" },
   { skill: "AWS", image: "aws.png" },
+  { skill: "PostgreSQL", image: "postgresql.png" },
+  { skill: "SQL Workbench", image: "sqlworkbench.png" },
+  { skill: "React Native", image: "reactnative.png" },
+  { skill: "Node.js", image: "nodejs.png" },
+  { skill: "Power Platforms", image: "powerplatforms.png" },
+  { skill: "FastAPI", image: "fastapi.png" },
 ];
