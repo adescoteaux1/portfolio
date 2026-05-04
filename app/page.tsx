@@ -332,8 +332,17 @@ const EnchantedPortfolio = () => {
             </a>
           </div>
 
+          {/* Substack */}
+          <div style={{ ...enter(12) }}>
+            <a href="https://substack.com/@ally719060" target="_blank" rel="noopener noreferrer"
+              style={{ ...buttonBaseStyle, justifyContent: 'center' }}
+              onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+              <span>Life etc</span>
+            </a>
+          </div>
+
           {/* Education */}
-          <div style={{ gridColumn: 'span 3', ...enter(12) }}>
+          <div style={{ gridColumn: 'span 3', ...enter(13) }}>
             <a href="/education" style={{ ...buttonBaseStyle, justifyContent: 'center' }}
               onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               <GraduationCap size={18} />
@@ -344,7 +353,7 @@ const EnchantedPortfolio = () => {
       </div>
 
       {/* Old Site Button */}
-      <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 10, ...enter(13) }}>
+      <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 10, ...enter(14) }}>
         <a
           href="/oldHome"
           style={{
