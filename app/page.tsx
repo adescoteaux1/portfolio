@@ -184,7 +184,7 @@ const EnchantedPortfolio = () => {
         }),
       }}>
         {/* Name — typewriter */}
-        <div style={{ marginBottom: '60px', textAlign: 'center', minHeight: '80px', ...enter(0) }}>
+        <div style={{ marginBottom: '30px', textAlign: 'center', minHeight: '80px', ...enter(0) }}>
           <h1 style={{
             fontSize: '64px',
             fontWeight: '400',

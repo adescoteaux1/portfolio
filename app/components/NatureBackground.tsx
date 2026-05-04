@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useRef } from 'react'
 import { useTheme } from '../context/theme'
 
 function rnd(n: number): number {
@@ -131,6 +131,48 @@ const NatureBackground = () => {
       dur: 4.5 + i * 0.6,
       delay: -(i * 0.55),
     })), [])
+
+  // Bird cursor-avoidance — direct DOM writes via RAF, no React re-renders
+  const flockOuterRefs = useRef<(HTMLDivElement | null)[]>([])
+  const flockInnerRefs = useRef<(HTMLDivElement | null)[]>([])
+  const mouseRef       = useRef({ x: -9999, y: -9999 })
+  const avoidRef       = useRef<number[]>(Array(5).fill(0))
+  const rafRef         = useRef<number | null>(null)
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => { mouseRef.current = { x: e.clientX, y: e.clientY } }
+    window.addEventListener('mousemove', onMove)
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [])
+
+  useEffect(() => {
+    const DIST = 140
+    const STRENGTH = 70
+    const LERP = 0.07
+
+    const tick = () => {
+      const { x: mx, y: my } = mouseRef.current
+      flockOuterRefs.current.forEach((outer, i) => {
+        if (!outer) return
+        const r = outer.getBoundingClientRect()
+        const cx = r.left + r.width / 2
+        const cy = r.top  + r.height / 2
+        const dx = mx - cx, dy = my - cy
+        const dist = Math.sqrt(dx * dx + dy * dy)
+        const target = dist < DIST && dist > 0
+          ? (dy > 0 ? -1 : 1) * (1 - dist / DIST) * STRENGTH
+          : 0
+        const next = avoidRef.current[i] + (target - avoidRef.current[i]) * LERP
+        avoidRef.current[i] = next
+        const inner = flockInnerRefs.current[i]
+        if (inner) inner.style.transform = `translateY(${next}px)`
+      })
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    rafRef.current = requestAnimationFrame(tick)
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
+  }, [])
 
   const c = isDark ? {
     farMtn:     '#1f4835',
@@ -289,32 +331,38 @@ const NatureBackground = () => {
         </div>
       )}
 
-      {/* Birds */}
+      {/* Birds — outer div carries CSS horizontal drift, inner div gets JS translateY for cursor avoidance */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
-        {birdFlocks.map(flock => (
-          <div key={flock.id} style={{
-            position: 'absolute',
-            top: `${flock.y}%`,
-            left: 0,
-            animation: `flock-fly-${flock.dir} ${flock.dur}s ${flock.delay}s linear infinite`,
-          }}>
-            {flockBirdOffsets.slice(0, flock.count).map((bird, bi) => (
-              <div key={bi} style={{
-                position: 'absolute',
-                left: `${bird.x}px`,
-                top: `${bird.y}px`,
-                animation: `bird-bob ${bird.bobDur}s ${bird.bobDelay}s ease-in-out infinite`,
-              }}>
-                <svg width="18" height="10" viewBox="-9 -5 18 10" fill="none" style={{ display: 'block' }}>
-                  <path
-                    d="M-9,0 C-5,-6 -1,-4 0,-2 C1,-4 5,-6 9,0"
-                    stroke={c.birdColor}
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </div>
-            ))}
+        {birdFlocks.map((flock, fi) => (
+          <div
+            key={flock.id}
+            ref={el => { flockOuterRefs.current[fi] = el }}
+            style={{
+              position: 'absolute',
+              top: `${flock.y}%`,
+              left: 0,
+              animation: `flock-fly-${flock.dir} ${flock.dur}s ${flock.delay}s linear infinite`,
+            }}
+          >
+            <div ref={el => { flockInnerRefs.current[fi] = el }}>
+              {flockBirdOffsets.slice(0, flock.count).map((bird, bi) => (
+                <div key={bi} style={{
+                  position: 'absolute',
+                  left: `${bird.x}px`,
+                  top: `${bird.y}px`,
+                  animation: `bird-bob ${bird.bobDur}s ${bird.bobDelay}s ease-in-out infinite`,
+                }}>
+                  <svg width="18" height="10" viewBox="-9 -5 18 10" fill="none" style={{ display: 'block' }}>
+                    <path
+                      d="M-9,0 C-5,-6 -1,-4 0,-2 C1,-4 5,-6 9,0"
+                      stroke={c.birdColor}
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
