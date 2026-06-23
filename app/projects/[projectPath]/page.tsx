@@ -4,15 +4,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ExternalLink, Github, ChevronLeft, ChevronRight, ArrowLeft, FileText } from 'lucide-react';
 import content from '../../content/content';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 const ProjectDetailPage = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  
-  // In real implementation, you'd use useParams() from next/navigation
-  // For now, showing first project as example
-  const project = content.projects[0];
+
+  const params = useParams();
+  const projectPath = params?.projectPath;
+  const project =
+    content.projects.find((p) => p.path === projectPath) ?? content.projects[0];
 
   const colors = {
     deepForest: '#1a3d2e',
